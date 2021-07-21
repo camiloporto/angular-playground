@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-// import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormControl} from '@angular/forms';
 
 export interface AccountStatementItemUI {
   date: Date;
@@ -47,10 +47,10 @@ export class AccountStatementComponent implements OnInit {
   displayedColumns: string[] = ['date', 'account', 'amount', 'description', 'tags'];
   dataSource = new MatTableDataSource(SAMPLE_DATA)
   accountName: string = "Transaction bank account";
-  // dateRange = new FormGroup({
-  //   start: new FormControl(),
-  //   end: new FormControl()
-  // });
+  dateRange = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
   constructor() { }
 
@@ -64,5 +64,13 @@ export class AccountStatementComponent implements OnInit {
 
   getTotal() {
     return this.dataSource.data.map(t => t.amount).reduce((acc, value) => acc + value, 0);
+  }
+
+  getReportStartDate() {
+    return this.dateRange.value.start;
+  }
+
+  getReportEndDate() {
+    return this.dateRange.value.end;
   }
 }

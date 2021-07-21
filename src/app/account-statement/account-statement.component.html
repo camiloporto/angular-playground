@@ -3,7 +3,7 @@ Account: {{accountName}}
 </p>
 <p>Add a filter by date range here..</p>
 
-<!-- <div>
+<div>
   <mat-form-field appearance="fill">
     <mat-label>Enter a date range</mat-label>
     <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
@@ -16,11 +16,13 @@ Account: {{accountName}}
     <mat-error *ngIf="dateRange.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
     <mat-error *ngIf="dateRange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
   </mat-form-field>
-</div> -->
-
+  <div>
+    <button mat-raised-button color="primary">Apply</button>
+  </div>
+</div>
 
 <mat-form-field appearance="standard">
-  <mat-label>Filter</mat-label>
+  <mat-label>Quick filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. alu" #input>
 </mat-form-field>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -71,4 +73,3 @@ Account: {{accountName}}
   </tr>
 
 </table>
-<button mat-raised-button color="primary">Primary</button>
