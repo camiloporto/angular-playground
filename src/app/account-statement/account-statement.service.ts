@@ -15,6 +15,13 @@ export class AccountStatement {
   entries: AccountStatementItem[];
 }
 
+const SAMPLE_DATA: AccountStatementItem[] = [
+  {date: new Date("2019-01-16"), account: 'Rent', description: 'pagamento aluguel', amount: -1300, tags: ['aluguel']},
+  {date: new Date("2019-01-12"), account: 'Salario', description: 'salario', amount: 4000, tags: ['salario']},
+  {date: new Date("2019-01-10"), account: 'Supermercado', description: 'feira do mes', amount: -237.45, tags: ['feira']},
+  {date: new Date("2019-01-07"), account: 'Internet', description: 'pagamento myReuplic', amount: -64, tags: ['aluguel']},
+]
+
 @Injectable()
 export class AccountStatementService {
 
@@ -22,9 +29,12 @@ export class AccountStatementService {
 
   getAccountStatement(accountId: string, begin: Date, end: Date) : AccountStatement {
     console.log(' fetching statement');
-    return new AccountStatement();
-
+    return {
+      begin: begin,
+      end: end,
+      accountId: accountId,
+      entries: SAMPLE_DATA
+    };
   }
-
 }
 
