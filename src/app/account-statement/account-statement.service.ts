@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 export class AccountStatementItem {
   date: Date;
@@ -25,16 +26,24 @@ const SAMPLE_DATA: AccountStatementItem[] = [
 @Injectable()
 export class AccountStatementService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getAccountStatement(accountId: string, begin: Date, end: Date) : AccountStatement {
-    console.log(' fetching statement');
+    this.fetchData(accountId, begin, end);
     return {
       begin: begin,
       end: end,
       accountId: accountId,
       entries: SAMPLE_DATA
     };
+  }
+
+  fetchData(accountId: string, begin: Date, end: Date) {
+    console.log(' fetching statement');
+    this.httpClient.get('assets/account/sample-accountStatement-response.json')
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 }
 

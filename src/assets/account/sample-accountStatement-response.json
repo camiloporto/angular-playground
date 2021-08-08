@@ -1,0 +1,28 @@
+{
+  "accountId": "account-123-id-adfsd",
+  "begin": "2020-10-15",
+  "end": "2020-10-25",
+  "entries" : [
+    {
+      "date": "2020-10-15",
+      "accountId": "wallet-account-id",
+      "value": -100.00,
+      "description": "withdrawal",
+      "tags": ["g2g"]
+    },
+    {
+      "date": "2020-10-17",
+      "accountId": "rent-account-id",
+      "value": -1230.00,
+      "description": "Aluguel apto",
+      "tags": ["rent"]
+    },
+    {
+      "date": "2020-10-20",
+      "accountId": "salary-account-id",
+      "value": 4000.00,
+      "description": "salario do mes",
+      "tags": ["salary"]
+    }
+  ]
+}
