@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -22,7 +22,7 @@ import {DemoMaterialModule} from './app/material-module';
     HttpClientModule, 
     MatNativeDateModule,
     BrowserAnimationsModule,
-    // ReactiveFormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
     {path: 'account-statement', component: AccountStatementComponent},
   ]), MatSliderModule],
