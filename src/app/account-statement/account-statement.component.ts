@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {FormGroup, FormControl} from '@angular/forms';
-import { MatDatepickerInputEvent, MatDatepickerIntl } from '@angular/material/datepicker';
-import { AccountStatementService } from './account-statement.service';
-// import { AccountStatementService } from './account-statement.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { AccountStatement, AccountStatementItem, AccountStatementService } from './account-statement.service';
 
 export interface AccountStatementItemUI {
   date: Date;
@@ -12,13 +11,6 @@ export interface AccountStatementItemUI {
   amount: number;
   tags: string[];
 }
-
-const SAMPLE_DATA: AccountStatementItemUI[] = [
-  {date: new Date("2019-01-16"), account: 'Rent', description: 'pagamento aluguel', amount: -1300, tags: ['aluguel']},
-  {date: new Date("2019-01-12"), account: 'Salario', description: 'salario', amount: 4000, tags: ['salario']},
-  {date: new Date("2019-01-10"), account: 'Supermercado', description: 'feira do mes', amount: -237.45, tags: ['feira']},
-  {date: new Date("2019-01-07"), account: 'Internet', description: 'pagamento myReuplic', amount: -64, tags: ['aluguel']},
-]
 
 @Component({
   selector: 'app-account-statement',
@@ -29,7 +21,7 @@ const SAMPLE_DATA: AccountStatementItemUI[] = [
 export class AccountStatementComponent implements OnInit {
 
   displayedColumns: string[] = ['date', 'account', 'amount', 'description', 'tags'];
-  dataSource = new MatTableDataSource(SAMPLE_DATA)
+  dataSource = new MatTableDataSource<AccountStatementItemUI>();
   accountName: string = "Transaction bank account";
   dateRange = new FormGroup({
     start: new FormControl(),
@@ -38,8 +30,7 @@ export class AccountStatementComponent implements OnInit {
 
   constructor(private accountStatementService: AccountStatementService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   dateSelected(event: MatDatepickerInputEvent<Date>) {
     if(this.isValidDateRange()) {
@@ -47,17 +38,35 @@ export class AccountStatementComponent implements OnInit {
     }
   }
 
-  fetchTableData() {
-    this.accountStatementService.getAccountStatement(
-      'someAID', 
-      this.getReportStartDate(), 
-      this.getReportEndDate());
-  }
-
   isValidDateRange() : boolean {
     return (this.getReportStartDate() != null && this.getReportEndDate() != null);
   }
 
+  fetchTableData() {
+     let statement: AccountStatement = this.accountStatementService.getAccountStatement(
+      'someAID', 
+      this.getReportStartDate(), 
+      this.getReportEndDate());
+    
+      this.renderAccountStatement(statement);
+  }
+
+  renderAccountStatement(statement: AccountStatement) {
+    this.accountName = statement.accountId;
+    var items = statement.entries.map(this.toAccountStatementItemUI);
+    console.log(items);
+    this.dataSource.data = items;
+  }
+
+  toAccountStatementItemUI(statementItem: AccountStatementItem): AccountStatementItemUI {
+    return {
+      date: statementItem.date,
+      account: statementItem.account,
+      description: statementItem.description,
+      amount: statementItem.amount,
+      tags: statementItem.tags
+    }
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
