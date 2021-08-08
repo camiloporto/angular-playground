@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {FormGroup, FormControl} from '@angular/forms';
 import { MatDatepickerInputEvent, MatDatepickerIntl } from '@angular/material/datepicker';
+import { AccountStatementService } from './account-statement.service';
 // import { AccountStatementService } from './account-statement.service';
 
 export interface AccountStatementItemUI {
@@ -22,7 +23,8 @@ const SAMPLE_DATA: AccountStatementItemUI[] = [
 @Component({
   selector: 'app-account-statement',
   templateUrl: './account-statement.component.html',
-  styleUrls: ['./account-statement.component.css']
+  styleUrls: ['./account-statement.component.css'],
+  providers: [AccountStatementService]
 })
 export class AccountStatementComponent implements OnInit {
 
@@ -34,26 +36,22 @@ export class AccountStatementComponent implements OnInit {
     end: new FormControl()
   });
 
-  constructor() {
-
-   }
+  constructor(private accountStatementService: AccountStatementService) {}
 
   ngOnInit() {
   }
 
   dateSelected(event: MatDatepickerInputEvent<Date>) {
     if(this.isValidDateRange()) {
-      this.fetchTableData()
-      console.log(' date range is valid. appply filter');
+      this.fetchTableData();
     }
-    console.log(' date range is not valid. Do nothing');
   }
 
   fetchTableData() {
-    // this.accountStatementService.getAccountStatement(
-    //   'someAID', 
-    //   this.getReportStartDate(), 
-    //   this.getReportEndDate());
+    this.accountStatementService.getAccountStatement(
+      'someAID', 
+      this.getReportStartDate(), 
+      this.getReportEndDate());
   }
 
   isValidDateRange() : boolean {

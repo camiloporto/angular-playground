@@ -21,7 +21,9 @@ export class AccountStatementService {
   constructor() { }
 
   getAccountStatement(accountId: string, begin: Date, end: Date) : AccountStatement {
+    console.log(' fetching statement');
     return new AccountStatement();
+
   }
 
 }
