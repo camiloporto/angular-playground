@@ -43,15 +43,17 @@ export class AccountStatementComponent implements OnInit {
   }
 
   fetchTableData() {
-     let statement: AccountStatement = this.accountStatementService.getAccountStatement(
+     this.accountStatementService.getAccountStatement(
       'someAID', 
       this.getReportStartDate(), 
-      this.getReportEndDate());
-    
-      this.renderAccountStatement(statement);
+      this.getReportEndDate()).subscribe((response: AccountStatement) => {
+        console.log(response);
+        this.renderAccountStatement(response);
+      });
   }
 
   renderAccountStatement(statement: AccountStatement) {
+    console.log('rendering statment')
     this.accountName = statement.accountId;
     var items = statement.entries.map(this.toAccountStatementItemUI);
     console.log(items);
@@ -61,9 +63,9 @@ export class AccountStatementComponent implements OnInit {
   toAccountStatementItemUI(statementItem: AccountStatementItem): AccountStatementItemUI {
     return {
       date: statementItem.date,
-      account: statementItem.account,
+      account: statementItem.accountId,
       description: statementItem.description,
-      amount: statementItem.amount,
+      amount: statementItem.value,
       tags: statementItem.tags
     }
   }
