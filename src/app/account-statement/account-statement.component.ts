@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {FormGroup, FormControl} from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AccountStatement, AccountStatementItem, AccountStatementService } from './account-statement.service';
+import { AccountService } from './account.service';
 
 export interface AccountStatementItemUI {
   date: Date;
@@ -16,7 +17,7 @@ export interface AccountStatementItemUI {
   selector: 'app-account-statement',
   templateUrl: './account-statement.component.html',
   styleUrls: ['./account-statement.component.css'],
-  providers: [AccountStatementService]
+  providers: [AccountStatementService, AccountService]
 })
 export class AccountStatementComponent implements OnInit {
 
@@ -28,7 +29,7 @@ export class AccountStatementComponent implements OnInit {
     end: new FormControl()
   });
 
-  constructor(private accountStatementService: AccountStatementService) {}
+  constructor(private accountStatementService: AccountStatementService, private accounService: AccountService) {}
 
   ngOnInit() {}
 
@@ -42,6 +43,8 @@ export class AccountStatementComponent implements OnInit {
     return (this.getReportStartDate() != null && this.getReportEndDate() != null);
   }
 
+// TODO build the UI for accountPicker. Use AccountService to fetch accountTree. map to list.. etc
+
   fetchTableData() {
      this.accountStatementService.getAccountStatement(
       'someAID', 
@@ -50,6 +53,12 @@ export class AccountStatementComponent implements OnInit {
         console.log(response);
         this.renderAccountStatement(response);
       });
+
+      this.accounService.getAccountTree('given accountSystemId').subscribe(
+        (response) => {
+          console.log(response);
+        }
+      )
   }
 
   renderAccountStatement(statement: AccountStatement) {
