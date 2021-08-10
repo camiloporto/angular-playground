@@ -1,0 +1,107 @@
+{
+  "accountSystemId": "monthly-budget-accountSystem",
+  "income" : {
+    "id" : "income-0",
+    "name" : "Incomes",
+    "description" : "Incomes",
+    "tags" : ["income"],
+    "children" : [
+      {
+        "id" : "income-0.1",
+        "name" : "Salary",
+        "description" : "job salary",
+        "tags" : ["income"],
+        "children" : []
+      },
+      {
+        "id" : "income-0.2",
+        "name" : "Hobby business",
+        "description" : "profit from hobby business",
+        "tags" : ["income"],
+        "children" : []
+      }
+    ]
+  },
+  "expenses" : {
+    "id" : "expenses-0",
+    "name" : "Expenses",
+    "description" : "Expenses",
+    "tags" : ["expense"],
+    "children" : [
+      {
+        "id" : "expense-0.1",
+        "name" : "Utilities",
+        "description" : "house utilities bills",
+        "tags" : ["expense"],
+        "children" : [
+          {
+            "id" : "expense-0.1.1",
+            "name" : "Internet",
+            "description" : "internet bill",
+            "tags" : ["expense"],
+            "children" : []
+          },
+          {
+            "id" : "expense-0.1.2",
+            "name" : "Eletricity",
+            "description" : "eletricity bill",
+            "tags" : ["expense"],
+            "children" : []
+          }
+        ]
+      },
+      {
+        "id" : "expense-0.2",
+        "name" : "Supermarket",
+        "description" : "groceries, weekly shops, supermarket",
+        "tags" : ["expense"],
+        "children" : [
+          {
+            "id" : "expense-0.2.1",
+            "name" : "Supermarket",
+            "description" : "monthly supermarket",
+            "tags" : ["expense"],
+            "children" : []
+          },
+          {
+            "id" : "expense-0.2.2",
+            "name" : "Groceries",
+            "description" : "groceries and weekly shops",
+            "tags" : ["expense"],
+            "children" : []
+          }
+        ]
+      }
+    ]
+  },
+  "assets" : {
+    "id" : "asset-0",
+    "name" : "Assets",
+    "description" : "Assets",
+    "tags" : ["asset"],
+    "children" : [
+      {
+        "id" : "asset-0.1",
+        "name" : "Bank",
+        "description" : "transaction account",
+        "tags" : ["asset"],
+        "children" :[]
+      }
+    ]
+  },
+  "liabilities" : {
+    "id" : "liab-0",
+    "name" : "Liabilities",
+    "description" : "Liabilities",
+    "tags" : ["liab"],
+    "children" : [
+      {
+        "id" : "liab-0.1",
+        "name" : "Home loadn",
+        "description" : "home loan",
+        "tags" : ["liab"],
+        "children" :[]
+      }
+    ]
+  }
+}
